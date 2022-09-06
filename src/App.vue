@@ -1,30 +1,28 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div id="app">
+  <component :is="layout">
+    <router-view />
+  </component>
+  </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import '../node_modules/materialize-css/dist/css/materialize.min.css';
+@import './assets/index.css';
 </style>
+
+<script>
+import authLayout from '@/layouts/authLayout.vue';
+import mainLayout from '@/layouts/mainLayout.vue';
+export default {
+  components: {
+    authLayout,
+    mainLayout,
+  },
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'auth') + '-layout';
+    },
+  },
+};
+</script>
